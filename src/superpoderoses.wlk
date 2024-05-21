@@ -53,6 +53,35 @@ class Personaje {
 	}
 }
 
+class Metahumano inherits Personaje {
+	override method capacidadDeBatalla() = super() * 2
+	
+	override method esInmune() = true
+	
+	override method enfrentar(peligro){
+		if (self.puedeEnfrentar(peligro)){
+			estrategia += peligro.complejidad()
+			espiritualidad += peligro.complejidad()
+		}
+	}
+}
+
+class Mago inherits Metahumano {
+	var property poderAcumulado
+	
+	override method capacidadDeBatalla() = super() + poderAcumulado
+	
+	override method enfrentar(peligro){
+		if (self.puedeEnfrentar(peligro)){
+			if (poderAcumulado > 10){
+				estrategia += peligro.complejidad()
+				espiritualidad += peligro.complejidad()	
+			}
+			poderAcumulado -= 5
+		}
+	}
+}
+
 //Poderes
 
 class PoderVelocidad {

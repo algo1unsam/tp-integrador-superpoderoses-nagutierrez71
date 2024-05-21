@@ -67,8 +67,8 @@ describe "Superpoderoses" {
         
 
 		// Punto 5 
-		fragmentadorMonopolios = null // TODO: constrir/obtener un Metahumano con estrategia = 1, espiritualidad = 6 y poderes = vueloRasante
-		educadorPublico = null // TODO: constrir/obtener un Mago con poder acumulado = 12, estrategia = 1, espiritualidad = 6 y poderes = vueloRasante	
+		fragmentadorMonopolios = new Metahumano(estrategia = 1, espiritualidad = 6, poderes = #{vueloRasante}) // constrir/obtener un Metahumano con estrategia = 1, espiritualidad = 6 y poderes = vueloRasante
+		educadorPublico = new Mago(estrategia = 1, espiritualidad = 6, poderes = #{vueloRasante}, poderAcumulado = 12) // constrir/obtener un Mago con poder acumulado = 12, estrategia = 1, espiritualidad = 6 y poderes = vueloRasante	
 }
 
 
@@ -201,34 +201,49 @@ describe "Superpoderoses" {
 		assert.equals(1,usinaDeDerechos.estrategia())
 	}
 
-/*
 	test "punto 5.1  Metahumano " {
-		// TODO: Verificar que la capacidad de batalla de fragmentadorMonopolios es 98
-		// TODO: Verificar que peligroSencilloRadiactivo puede ser afrontado por fragmentadorMonopolios
-		// TODO: Hacer que fragmentadorMonopolios afronte a peligroSencilloRadiactivo
-		// TODO: Verificar que la estrategia de fragmentadorMonopolios es 2
-		// TODO: Verificar que la espiritualidad de fragmentadorMonopolios es 7
-		// TODO: Verificar que peligroAlto NO puede ser afrontado por fragmentadorMonopolios
-		// TODO: Hacer que fragmentadorMonopolios afronte a peligroAlto (NO SE PUEDE!)
+		// Verificar que la capacidad de batalla de fragmentadorMonopolios es 98
+		assert.equals(98,fragmentadorMonopolios.capacidadDeBatalla())
+		// Verificar que peligroSencilloRadiactivo puede ser afrontado por fragmentadorMonopolios
+		assert.that(fragmentadorMonopolios.puedeEnfrentar(peligroSencilloRadiactivo))
+		// Hacer que fragmentadorMonopolios afronte a peligroSencilloRadiactivo
+		fragmentadorMonopolios.enfrentar(peligroSencilloRadiactivo)
+		// Verificar que la estrategia de fragmentadorMonopolios es 2
+		assert.equals(2,fragmentadorMonopolios.estrategia())
+		// Verificar que la espiritualidad de fragmentadorMonopolios es 7
+		assert.equals(7,fragmentadorMonopolios.espiritualidad())
+		// Verificar que peligroAlto NO puede ser afrontado por fragmentadorMonopolios
+		assert.notThat(fragmentadorMonopolios.puedeEnfrentar(peligroAlto))
+		// Hacer que fragmentadorMonopolios afronte a peligroAlto (NO SE PUEDE!)
+		fragmentadorMonopolios.enfrentar(peligroAlto)
 	}
- */
 
-/*
 	test "punto 5.2  Mago " {
-		// TODO: Verificar que la capacidad de batalla de educadorPublico es 110
-		// TODO: Verificar que peligroAlto NO puede ser afrontado por educadorPublico
-		// TODO: Hacer que educadorPublico afronte a peligroAlto (NO SE PUEDE!)
+		// Verificar que la capacidad de batalla de educadorPublico es 110
+		assert.equals(110,educadorPublico.capacidadDeBatalla())
+		// Verificar que peligroAlto NO puede ser afrontado por educadorPublico
+		assert.notThat(educadorPublico.puedeEnfrentar(peligroAlto))
+		// Hacer que educadorPublico afronte a peligroAlto (NO SE PUEDE!)
+		educadorPublico.enfrentar(peligroAlto)
 
-		// TODO: Verificar que peligroSencilloRadiactivo puede ser afrontado por educadorPublico
-		// TODO: Hacer que educadorPublico afronte a peligroSencilloRadiactivo
-		// TODO: Verificar que la estrategia de educadorPublico es 2
-		// TODO: Verificar que la espiritualidad de educadorPublico es 7
-		// TODO: Verificar que el poder acumulado de educadorPublico es 7
+		// Verificar que peligroSencilloRadiactivo puede ser afrontado por educadorPublico
+		assert.that(educadorPublico.puedeEnfrentar(peligroSencilloRadiactivo))
+		// Hacer que educadorPublico afronte a peligroSencilloRadiactivo
+		educadorPublico.enfrentar(peligroSencilloRadiactivo)
+		// Verificar que la estrategia de educadorPublico es 2
+		assert.equals(2,educadorPublico.estrategia())
+		// Verificar que la espiritualidad de educadorPublico es 7
+		assert.equals(7,educadorPublico.espiritualidad())
+		// Verificar que el poder acumulado de educadorPublico es 7
+		assert.equals(7,educadorPublico.poderAcumulado())
 		
-		// TODO: Hacer que educadorPublico afronte a peligroSencilloRadiactivo
-		// TODO: Verificar que la estrategia de educadorPublico es 2
-		// TODO: Verificar que la espiritualidad de educadorPublico es 7
-		// TODO: Verificar que el poder acumulado de educadorPublico es 2
+		// Hacer que educadorPublico afronte a peligroSencilloRadiactivo
+		educadorPublico.enfrentar(peligroSencilloRadiactivo)
+		// Verificar que la estrategia de educadorPublico es 2
+		assert.equals(2,educadorPublico.estrategia())
+		// Verificar que la espiritualidad de educadorPublico es 7
+		assert.equals(7,educadorPublico.espiritualidad())
+		// Verificar que el poder acumulado de educadorPublico es 2
+		assert.equals(2,educadorPublico.poderAcumulado())
 	}
- */
 }

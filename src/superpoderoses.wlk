@@ -16,6 +16,8 @@ class Equipo {
 		})
 		return mejoresPoderes
 	}
+	
+	method esSensatoEnfrentar(peligro) = miembros.all({miembro => miembro.puedeEnfrentar(peligro)})
 }
 
 //Personajes
@@ -26,12 +28,24 @@ class Personaje {
 	const property poderes
 	
 	method capacidadDeBatalla() = poderes.sum{ poder => poder.capacidadDeBatalla(self) }
+	
+	method puedeEnfrentar(peligro) {
+		if (peligro.tieneDesechosRadiactivos()){
+			return self.capacidadDeBatalla() > peligro.capacidadDeBatalla() and self.esInmune()
+		}
+		else{
+			return self.capacidadDeBatalla() > peligro.capacidadDeBatalla()
+		}
+	}
+	
+	method esInmune() = poderes.any({poder => poder.daInmunidad()})
 }
 
 //Poderes
 
 class PoderVelocidad {
 	const rapidez
+	method daInmunidad() = false
 	
 	method agilidad (personaje) = personaje.estrategia() * rapidez
 	
@@ -40,11 +54,13 @@ class PoderVelocidad {
 	method habilidadEspecial (personaje) = personaje.estrategia() + personaje.espiritualidad()
 	
 	method capacidadDeBatalla(personaje) = (self.agilidad(personaje) + self.fuerza(personaje)) * self.habilidadEspecial(personaje)
+	
 }
 
 class PoderVuelo {
 	const alturaMaxima
 	const energiaDespegue
+	method daInmunidad() = alturaMaxima > 200
 	
 	method agilidad (personaje) = personaje.estrategia() * alturaMaxima / energiaDespegue
 	
@@ -53,11 +69,13 @@ class PoderVuelo {
 	method habilidadEspecial (personaje) = personaje.estrategia() + personaje.espiritualidad()
 	
 	method capacidadDeBatalla(personaje) = (self.agilidad(personaje) + self.fuerza(personaje)) * self.habilidadEspecial(personaje)
+	
 }
 
 class PoderAmplificador {
 	const poderBase
 	const amplificador
+	method daInmunidad() = true
 	
 	method agilidad (personaje) = poderBase.agilidad(personaje)
 	
@@ -66,6 +84,12 @@ class PoderAmplificador {
 	method habilidadEspecial (personaje) = poderBase.habilidadEspecial(personaje) * amplificador
 	
 	method capacidadDeBatalla(personaje) = (self.agilidad(personaje) + self.fuerza(personaje)) * self.habilidadEspecial(personaje)
+	
+}
+
+class Peligro {
+	const property capacidadDeBatalla
+	const property tieneDesechosRadiactivos
 }
 
 

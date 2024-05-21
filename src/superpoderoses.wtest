@@ -8,26 +8,26 @@ describe "Superpoderoses" {
 	 * se debe remover la declaración de la variable y la línea en que se sugiere la instanciación.
 	 */
 
-	const altaVelocidad
-	const superVelocidad
-	const vueloRasante
-	const vueloAlto
-	const vueloRasanteAmplificado
-	const superVelocidadAmplificada
+	var altaVelocidad
+	var superVelocidad
+	var vueloRasante
+	var vueloAlto
+	var vueloRasanteAmplificado
+	var superVelocidadAmplificada
 	
-	const capitanaPatriaGrande
-	const plusvaliaCero
-	const usinaDeDerechos
+	var capitanaPatriaGrande
+	var plusvaliaCero
+	var usinaDeDerechos
 	
-	const cooperativaJusticiera
+	var cooperativaJusticiera
 	
-	const peligroSencillo
-	const peligroSencilloRadiactivo 
-	const peligroModerado
-	const peligroAlto
+	var peligroSencillo
+	var peligroSencilloRadiactivo 
+	var peligroModerado
+	var peligroAlto
 	
-	const fragmentadorMonopolios
-	const educadorPublico
+	var fragmentadorMonopolios
+	var educadorPublico
 		
 	
 	method initialize(){
@@ -36,21 +36,21 @@ describe "Superpoderoses" {
 		
 		// Punto 1
 		// Poderes
-		altaVelocidad = null // TODO: constrir/obtener un poder de velocidad con rapidez = 2
-		superVelocidad = null // TODO: constrir/obtener un poder de velocidad con rapidez = 3
-		vueloRasante = null // TODO: constrir/obtener un poder de vuelo con altura maxima = 10 y energia para despegue = 10
-		vueloAlto = null // TODO: constrir/obtener un poder de vuelo con altura maxima = 300 y energia para despegue = 200
-		vueloRasanteAmplificado = null // TODO: constrir/obtener un poder amplificador con poder base = vueloRasante y amplificador = 4
-		superVelocidadAmplificada = null // TODO: constrir/obtener un poder amplificador con poder base = superVelocidad y amplificador = 3
+		altaVelocidad = new PoderVelocidad(rapidez = 2) // constrir/obtener un poder de velocidad con rapidez = 2
+		superVelocidad = new PoderVelocidad(rapidez = 3) // constrir/obtener un poder de velocidad con rapidez = 3
+		vueloRasante = new PoderVuelo(alturaMaxima = 10, energiaDespegue = 10) // constrir/obtener un poder de vuelo con altura maxima = 10 y energia para despegue = 10
+		vueloAlto = new PoderVuelo(alturaMaxima = 300, energiaDespegue = 200)// constrir/obtener un poder de vuelo con altura maxima = 300 y energia para despegue = 200
+		vueloRasanteAmplificado = new PoderAmplificador(poderBase = vueloRasante, amplificador = 4) // constrir/obtener un poder amplificador con poder base = vueloRasante y amplificador = 4
+		superVelocidadAmplificada = new PoderAmplificador(poderBase = superVelocidad, amplificador = 3) // constrir/obtener un poder amplificador con poder base = superVelocidad y amplificador = 3
 	
 		// Personajes 
-		capitanaPatriaGrande = null // TODO: constrir/obtener un personaje con estrategia = 3, espiritualidad = 5 y poderes = superVelocidadAmplificada y vueloAlto
-		plusvaliaCero = null // TODO: constrir/obtener un personaje con estrategia = 2, espiritualidad = 4 y poderes = altaVelocidad y vueloRasanteAmplificado
-		usinaDeDerechos = null // TODO: constrir/obtener un personaje con estrategia = 1, espiritualidad = 6 y poderes = vueloRasante
+		capitanaPatriaGrande = new Personaje(estrategia = 3, espiritualidad = 5, poderes = #{superVelocidadAmplificada, vueloAlto}) // constrir/obtener un personaje con estrategia = 3, espiritualidad = 5 y poderes = superVelocidadAmplificada y vueloAlto
+		plusvaliaCero = new Personaje(estrategia = 2, espiritualidad = 4, poderes = #{altaVelocidad, vueloRasanteAmplificado}) // constrir/obtener un personaje con estrategia = 2, espiritualidad = 4 y poderes = altaVelocidad y vueloRasanteAmplificado
+		usinaDeDerechos = new Personaje(estrategia = 1, espiritualidad = 6, poderes = #{vueloRasante}) // constrir/obtener un personaje con estrategia = 1, espiritualidad = 6 y poderes = vueloRasante
 		
 		// Punto 2
 		// Equipo 
-		cooperativaJusticiera = null // TODO: constrir/obtener un conformado por capitanaPatriaGrande, plusvaliaCero y usinaDeDerechos
+		cooperativaJusticiera = new Equipo(miembros = #{capitanaPatriaGrande, plusvaliaCero, usinaDeDerechos}) // constrir/obtener un conformado por capitanaPatriaGrande, plusvaliaCero y usinaDeDerechos
 		
 		// Punto 3 
 		// Peligros
@@ -79,41 +79,47 @@ describe "Superpoderoses" {
 	 * a medida que se avanza con la solución del ejercicio
 	 */
 	
-/*
+
 	test "punto 1.1 capacidad de batalla que aporta un poder" {
-		// TODO: Verificar que la capacidad de batalla que le aporta superVelocidadAmplificada a capitanaPatriaGrande es 576
-		// TODO: Verificar que la capacidad de batalla que le aporta vueloAlto a capitanaPatriaGrande es 876
-		// TODO: Verificar que la capacidad de batalla que le aporta altaVelocidad a plusvaliaCero es 72
-		// TODO: Verificar que la capacidad de batalla que le aporta vueloRasanteAmplificado a plusvaliaCero es 144
-		// TODO: Verificar que la capacidad de batalla que le aporta vueloRasante a usinaDeDerechos es 49
+		// Verificar que la capacidad de batalla que le aporta superVelocidadAmplificada a capitanaPatriaGrande es 576
+		assert.equals(576,superVelocidadAmplificada.capacidadDeBatalla(capitanaPatriaGrande))
+		// Verificar que la capacidad de batalla que le aporta vueloAlto a capitanaPatriaGrande es 876
+		assert.equals(876,vueloAlto.capacidadDeBatalla(capitanaPatriaGrande))
+		// Verificar que la capacidad de batalla que le aporta altaVelocidad a plusvaliaCero es 72
+		assert.equals(72,altaVelocidad.capacidadDeBatalla(plusvaliaCero))
+		// Verificar que la capacidad de batalla que le aporta vueloRasanteAmplificado a plusvaliaCero es 144
+		assert.equals(144,vueloRasanteAmplificado.capacidadDeBatalla(plusvaliaCero))
+		// Verificar que la capacidad de batalla que le aporta vueloRasante a usinaDeDerechos es 49
+		assert.equals(49,vueloRasante.capacidadDeBatalla(usinaDeDerechos))
 	}
- */	
 
-/*
+
 	test "punto 1.2 capacidad de batalla de un personaje" {
-		// TODO: Verificar que la capacidad de batalla de capitanaPatriaGrande es 1452
-		// TODO: Verificar que la capacidad de batalla de plusvaliaCero es 216
-		// TODO: Verificar que la capacidad de batalla de usinaDeDerechos es 49
+		// Verificar que la capacidad de batalla de capitanaPatriaGrande es 1452
+		assert.equals(1452,capitanaPatriaGrande.capacidadDeBatalla())
+		// Verificar que la capacidad de batalla de plusvaliaCero es 216
+		assert.equals(216,plusvaliaCero.capacidadDeBatalla())
+		// Verificar que la capacidad de batalla de usinaDeDerechos es 49
+		assert.equals(49,usinaDeDerechos.capacidadDeBatalla())
 	}
- */	
+	
 
-/*
+
 	test "punto 2.1 Saber el miembro vulnerable de un equipo" {
-		// TODO: Verificar que miembro mas vulnerable de cooperativaJusticiera es usinaDeDerechos
-	}
- */	
+		// Verificar que miembro mas vulnerable de cooperativaJusticiera es usinaDeDerechos
+		assert.equals(usinaDeDerechos,cooperativaJusticiera.miembroMasVulnerable())
+	}	
 
-/*
+
 	test "punto 2.2 Saber la calidad de un equipo" {
-		// TODO: Verificar que la calidad de cooperativaJusticiera es 572.33333
+		// Verificar que la calidad de cooperativaJusticiera es 572.33333
+		assert.equals(572,cooperativaJusticiera.calidad())
 	}
- */	
 
-/*
 	test "punto 2.3 Saber los mejores poderes de un equipo" {
-		// TODO: Verificar que los mejores poderes de cooperativaJusticiera son vueloAlto, vueloRasanteAmplificado y vueloRasante
+		// Verificar que los mejores poderes de cooperativaJusticiera son vueloAlto, vueloRasanteAmplificado y vueloRasante
+		assert.equals(#{vueloAlto, vueloRasanteAmplificado, vueloRasante},cooperativaJusticiera.mejoresPoderes())
 	}
- */	
 	
 /*
 	test "punto 3.1 personajes contra el peligro" {

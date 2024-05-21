@@ -18,13 +18,19 @@ class Equipo {
 	}
 	
 	method esSensatoEnfrentar(peligro) = miembros.all({miembro => miembro.puedeEnfrentar(peligro)})
+	
+	method enfrentar(peligro) {
+		if (miembros.filter({miembro => miembro.puedeEnfrentar(peligro)}).size() > peligro.personajesQueBanca()) {
+			miembros.filter({miembro => miembro.puedeEnfrentar(peligro)}).forEach({participante => participante.enfrentar(peligro)})
+		}
+	}
 }
 
 //Personajes
 
 class Personaje {
-	const property estrategia
-	const property espiritualidad
+	var property estrategia
+	var property espiritualidad
 	const property poderes
 	
 	method capacidadDeBatalla() = poderes.sum{ poder => poder.capacidadDeBatalla(self) }
@@ -39,6 +45,12 @@ class Personaje {
 	}
 	
 	method esInmune() = poderes.any({poder => poder.daInmunidad()})
+	
+	method enfrentar(peligro){
+		if (self.puedeEnfrentar(peligro)){
+			estrategia += peligro.complejidad()
+		}
+	}
 }
 
 //Poderes
@@ -90,6 +102,8 @@ class PoderAmplificador {
 class Peligro {
 	const property capacidadDeBatalla
 	const property tieneDesechosRadiactivos
+	const property complejidad
+	const property personajesQueBanca
 }
 
 
